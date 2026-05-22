@@ -1,5 +1,4 @@
 import { Video } from "@/data/videos";
-import Image from "next/image";
 
 interface VideoCardProps {
   video: Video;

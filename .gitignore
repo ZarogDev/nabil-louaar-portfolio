@@ -45,3 +45,11 @@ next-env.d.ts
 
 # Original PNG sources — only WebP committed
 public/images/*.png
+
+/src/generated/prisma
+
+# SQLite database files
+*.db
+*.db-journal
+*.db-wal
+*.db-shm

@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { Lock } from "lucide-react";
 
 interface HeaderProps {
   onMenuOpen: () => void;
@@ -9,12 +11,12 @@ interface HeaderProps {
 export default function Header({ onMenuOpen }: HeaderProps) {
   return (
     <header className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-[clamp(28px,4vw,56px)] py-[30px] pointer-events-none">
-      <a href="#home" className="pointer-events-auto flex items-center gap-[14px] text-[#f4f1ea]">
+      <a href="#home" className="pointer-events-auto flex items-center gap-[16px] text-[#f4f1ea]">
         <Image
-          src="/images/logo-monogram.webp"
+          src="/images/logo-monogram-transparent.webp"
           alt="Nabil Louaar — monogramme"
-          width={42}
-          height={42}
+          width={58}
+          height={58}
           className="block"
           priority
         />
@@ -26,10 +28,19 @@ export default function Header({ onMenuOpen }: HeaderProps) {
         </span>
       </a>
 
-      <div className="pointer-events-auto flex items-center gap-[26px]">
+      <div className="pointer-events-auto flex items-center gap-[20px]">
+        {/* Accès discret à l'espace admin */}
+        <Link
+          href="/admin/login"
+          aria-label="Accès administration"
+          className="text-[#f4f1ea] opacity-40 hover:opacity-100 transition-opacity duration-200"
+        >
+          <Lock size={15} strokeWidth={1.5} />
+        </Link>
+
         <button
           onClick={onMenuOpen}
-          aria-label="Menu"
+          aria-label="Ouvrir le menu"
           className="inline-flex flex-col justify-center gap-[6px] w-[34px] h-[34px] cursor-pointer text-[#f4f1ea] group"
         >
           <span className="block h-px w-[28px] bg-current transition-all duration-[250ms]" />

@@ -1,0 +1,45 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Video {
+  id           Int      @id @default(autoincrement())
+  title        String
+  duration     String
+  type         String
+  year         Int
+  festival     String?
+  description  String?
+  thumbnailUrl String?
+  videoUrl     String?
+  order        Int      @default(0)
+  published    Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model AdminConfig {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
+model Writing {
+  id          Int      @id @default(autoincrement())
+  title       String
+  year        Int
+  publisher   String
+  description String?
+  coverUrl    String?
+  color       String?
+  badge       String?
+  order       Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

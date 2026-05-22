@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/layout/Header";
 import NavigationOverlay from "@/components/layout/NavigationOverlay";
 import Footer from "@/components/layout/Footer";
@@ -13,6 +13,11 @@ import NewsletterSection from "@/components/sections/NewsletterSection";
 
 export default function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
 
   return (
     <>

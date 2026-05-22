@@ -10,7 +10,7 @@ interface NavigationOverlayProps {
 
 const navItems = [
   { href: "#home",         label: "Accueil",        em: null },
-  { href: "#presentation", label: "Présen",          em: "tation" },
+  { href: "#presentation", label: "Présentation",      em: null     },
   { href: "#ecriture",     label: null,              em: "Écriture" },
   { href: "#video",        label: "Vidéo",           em: null },
   { href: "#contact",      label: "Contact",         em: null },
@@ -36,7 +36,7 @@ export default function NavigationOverlay({ isOpen, onClose }: NavigationOverlay
         {/* Top */}
         <div className="flex justify-between items-center">
           <span className="flex items-center gap-[14px] text-[#f4f1ea]">
-            <Image src="/images/logo-monogram.webp" alt="" width={42} height={42} />
+            <Image src="/images/logo-monogram-transparent.webp" alt="" width={42} height={42} />
             <span className="font-serif font-medium text-[18px] leading-none">
               Nabil Louaar
               <small className="block font-mono text-[9.5px] tracking-[.24em] uppercase text-[#a8a59d] mt-[6px] font-normal">
@@ -85,9 +85,7 @@ export default function NavigationOverlay({ isOpen, onClose }: NavigationOverlay
         </ul>
 
         {/* Footer */}
-        <div className="flex justify-between font-mono text-[10.5px] tracking-[.22em] uppercase text-[#7a7770] mt-10">
-          <span>bonjour@louaar.fr</span>
-        </div>
+        <div className="flex justify-between font-mono text-[10.5px] tracking-[.22em] uppercase text-[#7a7770] mt-10" />
       </div>
 
       {/* Colonne droite : portrait + socials */}
@@ -100,16 +98,18 @@ export default function NavigationOverlay({ isOpen, onClose }: NavigationOverlay
 
         {/* Portrait */}
         <div className="flex flex-col items-center justify-center w-full">
-          <div className="w-full max-w-[280px] aspect-video overflow-hidden border border-[#1f1d1a] relative">
+          <div className="w-full max-w-[380px] aspect-[2/3] overflow-hidden border border-[#1f1d1a] relative">
             <Image
               src="/images/portrait-menu.webp"
               alt="Nabil Louaar"
               fill
               className="object-cover object-top grayscale"
-              sizes="280px"
+              sizes="(max-width: 1024px) 0px, min(380px, 40vw)"
+              quality={95}
+              priority
             />
           </div>
-          <div className="w-full max-w-[280px] mt-3 flex justify-between font-mono text-[10px] tracking-[.22em] uppercase text-[#7a7770]">
+          <div className="w-full max-w-[380px] mt-3 flex justify-between font-mono text-[10px] tracking-[.22em] uppercase text-[#7a7770]">
             <span>Nabil Louaar</span>
             <span>2025</span>
           </div>
@@ -120,7 +120,7 @@ export default function NavigationOverlay({ isOpen, onClose }: NavigationOverlay
             Ailleurs
           </h5>
           <ul className="list-none flex flex-col gap-[10px]">
-            {["Instagram ↗", "LinkedIn ↗", "X ↗", "bonjour@louaar.fr"].map((link) => (
+            {["Instagram ↗", "LinkedIn ↗", "X ↗"].map((link) => (
               <li key={link}>
                 <a href="#" className="font-serif text-[18px] text-[#e9e5da] hover:text-white">
                   {link}
