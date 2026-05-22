@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-Content \"C:\\\\Users\\\\Zarog\\\\Downloads\\\\Nabil Louaar - Homepage _standalone_.html\" -TotalCount 5)",
+      "Bash(Select-Object -First 5)",
+      "PowerShell($content = Get-Content \"C:\\\\Users\\\\Zarog\\\\Downloads\\\\Nabil Louaar - Homepage _standalone_.html\" -Raw; Write-Output \"File size: $\\($content.Length\\) chars\"; Write-Output \"---FIRST 3000 CHARS---\"; $content.Substring\\(0, 3000\\))",
+      "PowerShell($content = Get-Content \"C:\\\\Users\\\\Zarog\\\\Downloads\\\\Nabil Louaar - Homepage _standalone_.html\" -Raw; $start = $content.IndexOf\\('const manifest'\\); $content.Substring\\($start, [Math]::Min\\(2000, $content.Length - $start\\)\\))",
+      "PowerShell($content = Get-Content \"C:\\\\Users\\\\Zarog\\\\Downloads\\\\Nabil Louaar - Homepage _standalone_.html\" -Raw; $templateIdx = $content.IndexOf\\('\"__bundler/template\"'\\); Write-Output \"Template tag found at: $templateIdx\"; if \\($templateIdx -gt 0\\) { $content.Substring\\($templateIdx, [Math]::Min\\(3000, $content.Length - $templateIdx\\)\\) })",
+      "PowerShell($content = Get-Content \"C:\\\\Users\\\\Zarog\\\\Downloads\\\\Nabil Louaar - Homepage _standalone_.html\" -Raw; $templateStart = $content.IndexOf\\('<script type=\"__bundler/template\">'\\) + 34; $templateEnd = $content.IndexOf\\('</script>', $templateStart\\); $jsonStr = $content.Substring\\($templateStart, $templateEnd - $templateStart\\).Trim\\(\\); Add-Type -AssemblyName System.Web; $decoded = [System.Web.HttpUtility]::JavaScriptStringDecode\\($jsonStr\\); Write-Output \"decoded len=$\\($decoded.Length\\)\"; $decoded | Out-File \"C:\\\\Users\\\\Zarog\\\\Downloads\\\\nabil_ext.html\" -Encoding UTF8 -NoNewline; \\(Get-Item \"C:\\\\Users\\\\Zarog\\\\Downloads\\\\nabil_ext.html\"\\).Length)",
+      "Bash(python3 -)",
+      "PowerShell(python --version 2>&1)",
+      "PowerShell(python3 --version 2>&1)",
+      "Bash(pnpm --version)",
+      "Bash(npm --version)",
+      "Bash(pnpm create *)"
+    ]
+  },
+  "projectType": "nextjs",
+  "packageManager": "pnpm",
+  "defaultBranch": "main",
+  "runLighthouse": true,
+  "devServerUrl": "http://localhost:3000",
+  "runFullAuditAfterHour": 23,
+  "preferredUi": [
+    "shadcn/ui",
+    "magicui"
+  ],
+  "preferredChecks": [
+    "lint",
+    "typecheck",
+    "build",
+    "audit",
+    "seo",
+    "a11y",
+    "security"
+  ]
+}
