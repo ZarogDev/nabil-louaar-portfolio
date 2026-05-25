@@ -94,7 +94,15 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        <a
+          href="#main-content"
+          className="fixed top-[-100%] left-4 z-[9999] bg-[#f4f1ea] text-[#0a0a0a] font-mono text-[11px] tracking-[.18em] uppercase px-4 py-2 focus:top-4 transition-[top] duration-200"
+        >
+          Aller au contenu
+        </a>
+        {children}
+      </body>
     </html>
   );
 }

@@ -1,12 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
+import { requireAdmin } from "@/lib/auth";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  if (!await requireAdmin(request)) return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
   const videos = await prisma.video.findMany({ orderBy: { order: "asc" } });
   return NextResponse.json(videos);
 }
 
 export async function POST(request: NextRequest) {
+  if (!await requireAdmin(request)) return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
   const data = await request.json();
   const video = await prisma.video.create({
     data: {

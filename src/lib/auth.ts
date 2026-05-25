@@ -1,8 +1,9 @@
 import { SignJWT, jwtVerify } from "jose";
+import type { NextRequest } from "next/server";
 
-const JWT_SECRET = new TextEncoder().encode(
-  process.env.ADMIN_JWT_SECRET ?? "fallback-secret-change-in-production"
-);
+const secret = process.env.ADMIN_JWT_SECRET;
+if (!secret) throw new Error("Missing ADMIN_JWT_SECRET env var");
+const JWT_SECRET = new TextEncoder().encode(secret);
 
 export const COOKIE_NAME = "admin_token";
 export const COOKIE_MAX_AGE = 60 * 60 * 8; // 8 hours
@@ -22,6 +23,12 @@ export async function verifyAdminToken(token: string): Promise<boolean> {
   } catch {
     return false;
   }
+}
+
+export async function requireAdmin(request: NextRequest): Promise<boolean> {
+  const token = request.cookies.get(COOKIE_NAME)?.value;
+  if (!token) return false;
+  return verifyAdminToken(token);
 }
 
 /** Returns the active password hash: DB-stored override first, then env var fallback. */

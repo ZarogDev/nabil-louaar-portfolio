@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import { getPasswordHash } from "@/lib/auth";
+import { getPasswordHash, requireAdmin } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 
 export async function POST(request: NextRequest) {
+  if (!await requireAdmin(request)) return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
   const { currentPassword, newPassword } = await request.json().catch(() => ({}));
 
   if (!currentPassword || !newPassword) {

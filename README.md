@@ -74,7 +74,9 @@ nabil/
 │   │   ├── not-found.tsx       # page 404 personnalisée
 │   │   ├── error.tsx           # page 500 globale
 │   │   ├── api/admin/          # routes API : login, logout, change-password, videos, writings
-│   │   └── admin/              # dashboard admin (layout, login, vidéos, écrits, réglages)
+│   │   ├── admin/              # dashboard admin (layout, login, vidéos, écrits, réglages)
+│   │   ├── sitemap.ts          # sitemap.xml généré dynamiquement
+│   │   └── robots.ts           # robots.txt (bloque /api/ et /admin/)
 │   ├── lib/
 │   │   ├── db.ts               # singleton PrismaClient (adapter SQLite)
 │   │   ├── auth.ts             # JWT (jose) + hash password (bcryptjs)
@@ -145,7 +147,9 @@ Accessible via l'icône cadenas dans la navbar (`/admin/login`).
 
 - **Auth** : mot de passe unique stocké en hash bcrypt (env var `ADMIN_PASSWORD_HASH`, surcharge possible via DB `AdminConfig`)
 - **JWT** : cookie httpOnly/secure/sameSite:strict, 7 jours
-- **Protection** : toutes les routes `/admin/*` sauf `/admin/login` sont protégées par `src/proxy.ts` (Next.js 16 middleware)
+- **Protection pages** : toutes les routes `/admin/*` sauf `/admin/login` sont protégées par `src/proxy.ts` (Next.js 16 middleware)
+- **Protection API** : chaque handler `/api/admin/*` appelle `requireAdmin()` (`src/lib/auth.ts`) — le middleware Edge ne couvre pas les routes API
+- **ADMIN_JWT_SECRET** : obligatoire — le serveur lance une erreur au démarrage si absent
 - **CRUD** : vidéos et écrits gérables depuis le dashboard
 - **Changement de mot de passe** : depuis Réglages, sans redéploiement
 
@@ -163,6 +167,15 @@ En-têtes HTTP configurés dans `next.config.ts` :
 | `Strict-Transport-Security` | `max-age=63072000; includeSubDomains` |
 | `Referrer-Policy` | `strict-origin-when-cross-origin` |
 | `Permissions-Policy` | Désactive caméra, micro, géolocalisation |
+
+---
+
+## SEO & Accessibilité
+
+- **sitemap.xml** : généré automatiquement via `src/app/sitemap.ts`
+- **robots.txt** : `/api/*` et `/admin/*` exclus de l'indexation (`src/app/robots.ts`)
+- **Skip link** : lien "Aller au contenu principal" masqué, visible au focus (premier élément tabulable)
+- **`page.tsx` Server Component** : la page d'accueil est statique ; `Header.tsx` gère son propre état mobile en interne
 
 ---
 
