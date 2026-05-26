@@ -2,6 +2,12 @@
 
 Site portfolio de **Nabil Louaar**, écrivain et réalisateur franco-algérien.
 
+> [!CAUTION]
+> Ce projet utilise **Next.js 16** (version comportant des modifications majeures d'API et de structure par rapport aux versions antérieures). Avant toute modification de code, veuillez lire attentivement les consignes de développement décrites dans [`AGENTS.md`](file:///d:/Projets_App/nabil-louaar-portfolio/AGENTS.md).
+
+> [!TIP]
+> Pour les conventions de code, l'organisation détaillée de l'architecture, la structure Tailwind CSS v4 ou les instructions pour ajouter une nouvelle section UI, consultez le guide des [Conventions du Projet](file:///d:/Projets_App/nabil-louaar-portfolio/CONVENTIONS.md).
+
 **Repo :** [github.com/ZarogDev/nabil-louaar-portfolio](https://github.com/ZarogDev/nabil-louaar-portfolio)
 
 ---
