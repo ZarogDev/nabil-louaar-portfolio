@@ -14,14 +14,20 @@ export const metadata: Metadata = {
     "Récits sur l'exil, la mémoire et la lumière. Romans publiés chez Actes du Sud et P.O.L., courts métrages primés à Cannes, Locarno et Arte.",
   keywords: [
     "Nabil Louaar",
-    "écrivain",
+    "écrivain franco-algérien",
     "réalisateur",
-    "franco-algérien",
-    "roman",
-    "cinéma",
+    "romancier",
+    "littérature francophone",
+    "court métrage d'auteur",
     "Actes du Sud",
     "P.O.L.",
-    "court métrage",
+    "festival de Cannes",
+    "Locarno",
+    "Les Films du Worso",
+    "exil mémoire littérature",
+    "cinéma auteur",
+    "La Fémis",
+    "Sétif Paris",
   ],
   authors: [{ name: "Nabil Louaar", url: BASE_URL }],
   creator: "Nabil Louaar",
@@ -33,6 +39,9 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: BASE_URL,
+    languages: {
+      "fr-FR": BASE_URL,
+    },
   },
   openGraph: {
     type: "profile",
@@ -66,6 +75,9 @@ const jsonLd = {
   "@type": "Person",
   name: "Nabil Louaar",
   url: BASE_URL,
+  image: `${BASE_URL}/images/portrait-hero.webp`,
+  description:
+    "Écrivain et réalisateur franco-algérien. Romans publiés chez Actes du Sud et P.O.L. Courts métrages sélectionnés à Cannes et Locarno.",
   jobTitle: ["Écrivain", "Réalisateur"],
   nationality: { "@type": "Country", name: "France" },
   birthPlace: { "@type": "Place", name: "Sétif, Algérie" },
@@ -78,6 +90,30 @@ const jsonLd = {
     { "@type": "Organization", name: "P.O.L." },
     { "@type": "Organization", name: "Les Films du Worso" },
   ],
+  hasOccupation: [
+    {
+      "@type": "Occupation",
+      name: "Écrivain",
+      occupationLocation: { "@type": "Country", name: "France" },
+    },
+    {
+      "@type": "Occupation",
+      name: "Réalisateur de cinéma",
+      occupationLocation: { "@type": "Country", name: "France" },
+    },
+  ],
+  knowsAbout: [
+    "Littérature francophone",
+    "Cinéma d'auteur",
+    "Écriture scénaristique",
+    "Exil et mémoire",
+    "Littérature algérienne",
+  ],
+  alumniOf: {
+    "@type": "EducationalOrganization",
+    name: "La Fémis",
+    url: "https://www.femis.fr",
+  },
 };
 
 export default function RootLayout({

@@ -6,7 +6,11 @@ const contactLinks = [
   { label: "Presse — presse@louaar.fr", href: "mailto:presse@louaar.fr" },
   { label: "Agent — c.mercier@m-l.fr",  href: "mailto:c.mercier@m-l.fr" },
 ];
-const socialLinks = ["Instagram ↗", "LinkedIn ↗", "X ↗"];
+const socialLinks = [
+  { label: "Instagram ↗", href: "https://www.instagram.com/nabillouaar" },
+  { label: "LinkedIn ↗", href: "https://www.linkedin.com/in/nabillouaar" },
+  { label: "X ↗", href: "https://x.com/nabillouaar" },
+];
 
 export default function Footer() {
   return (
@@ -65,9 +69,14 @@ export default function Footer() {
             Ailleurs
           </h4>
           <ul className="list-none flex flex-col gap-2">
-            {socialLinks.map((label) => (
+            {socialLinks.map(({ label, href }) => (
               <li key={label}>
-                <a href="#" className="font-serif text-[18px] text-[#e9e5da] hover:text-white transition-colors">
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-serif text-[18px] text-[#e9e5da] hover:text-white transition-colors"
+                >
                   {label}
                 </a>
               </li>

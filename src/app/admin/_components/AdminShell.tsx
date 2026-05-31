@@ -17,7 +17,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
 
   async function handleLogout() {
     await fetch("/api/admin/logout", { method: "POST" });
-    router.replace("/admin/login");
+    router.replace("/");
   }
 
   return (
@@ -27,6 +27,18 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
         <div className="px-6 py-7 border-b border-[#1f1d1a] flex items-center gap-3">
           <Image src="/images/logo-monogram.webp" alt="" width={28} height={28} className="opacity-70" />
           <span className="font-serif text-[15px] text-[#f4f1ea]">Admin</span>
+        </div>
+
+        {/* Lien retour accueil */}
+        <div className="px-3 pt-4 pb-2 border-b border-[#1f1d1a]">
+          <Link
+            href="/"
+            className="flex items-center gap-2 px-3 py-2 font-mono text-[11px] tracking-[.16em] uppercase
+                       text-[#7a7770] hover:text-[#e9e5da] hover:bg-[#161614] rounded-sm transition-colors"
+          >
+            <span className="text-[13px] leading-none">←</span>
+            Accueil
+          </Link>
         </div>
 
         <nav className="flex-1 px-3 py-6 flex flex-col gap-1">

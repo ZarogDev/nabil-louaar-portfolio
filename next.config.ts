@@ -17,7 +17,7 @@ const securityHeaders = [
       "script-src 'self' 'unsafe-inline' 'unsafe-eval'", // unsafe-eval required by Next.js dev
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
-      "img-src 'self' data: blob:",
+      "img-src 'self' data: blob: https://img.youtube.com https://i.ytimg.com",
       "connect-src 'self'",
       "frame-ancestors 'none'",
     ].join("; "),
