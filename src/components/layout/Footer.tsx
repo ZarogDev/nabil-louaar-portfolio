@@ -89,12 +89,8 @@ export default function Footer() {
       <div className="max-w-[1640px] mx-auto mt-[clamp(50px,6vw,90px)] border-t border-[#1f1d1a] pt-[22px] flex flex-col gap-3 md:flex-row md:items-center md:justify-between font-mono text-[10.5px] tracking-[.18em] uppercase text-[#7a7770]">
         <span>© Nabil Louaar — 2026</span>
         <span className="tracking-[.14em] normal-case text-[10px]">
-          © 2026 ZarogDev. Design &amp; développement par{" "}
+          © 2026 ZarogDev. Agence digitale — design &amp; développement signés ZarogDev.{" "}
           <a href="mailto:zarogdev@gmail.com" className="hover:text-[#a8a59d] transition-colors underline underline-offset-2">
-            ZarogDev
-          </a>
-          {" "}— collaborations :{" "}
-          <a href="mailto:zarogdev@gmail.com" className="hover:text-[#a8a59d] transition-colors">
             zarogdev@gmail.com
           </a>
         </span>
