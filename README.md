@@ -20,9 +20,10 @@ Site portfolio de **Nabil Louaar**, écrivain et réalisateur franco-algérien.
 | Langage | TypeScript 5 |
 | Style | Tailwind CSS v4 |
 | Icônes | Lucide React |
-| ORM | Prisma 7 (adapter better-sqlite3) |
+| ORM | Prisma 7 — **PostgreSQL** via adapter `@prisma/adapter-pg` |
+| Base de données | **Neon** (prod) · PostgreSQL local (dev) |
 | Auth | jose (JWT) + bcryptjs |
-| Gestionnaire de paquets | pnpm |
+| Gestionnaire de paquets | npm |
 | Runtime | React 19 / Node 20 |
 
 ---
@@ -30,25 +31,31 @@ Site portfolio de **Nabil Louaar**, écrivain et réalisateur franco-algérien.
 ## Lancer le projet
 
 ```bash
-pnpm install
-cp .env.local.example .env.local   # puis renseigner les variables
-pnpm dev        # http://localhost:3000
-pnpm build      # prisma generate + next build
-pnpm start      # serveur de production
-pnpm lint       # ESLint
+npm install
+cp .env.example .env            # puis renseigner les variables
+npm run dev        # http://localhost:3000
+npm run build      # prisma generate + prisma migrate deploy + next build
+npm start          # serveur de production
+npm run lint       # ESLint
 ```
+
+> Le script `build` applique automatiquement les migrations Prisma (`migrate deploy`) sur la base cible avant le build Next — pratique pour Vercel.
 
 ---
 
 ## Variables d'environnement
 
-Créer un fichier `.env.local` à la racine :
+Créer un fichier `.env` à la racine (les URLs Neon sont définies dans Vercel pour la prod) :
 
 ```env
-DATABASE_URL="file:./dev.db"
+# Connexion poolée (runtime) + connexion directe (migrations)
+DATABASE_URL="postgresql://USER:PWD@HOST-pooler.../neondb?sslmode=require"
+DIRECT_URL="postgresql://USER:PWD@HOST.../neondb?sslmode=require"
 ADMIN_PASSWORD_HASH="<bcrypt hash du mot de passe>"
 ADMIN_JWT_SECRET="<chaîne aléatoire 32+ caractères>"
 ```
+
+> **Prisma 7** : les URLs ne vivent plus dans `schema.prisma` mais dans `prisma.config.ts` (migrations) et l'`adapter` du `PrismaClient` (runtime). En dev local : `DATABASE_URL`/`DIRECT_URL` pointent vers `postgresql://postgres@localhost:5432/nabil_louaar`.
 
 Générer un hash bcrypt (Node) :
 ```js
@@ -84,7 +91,7 @@ nabil/
 │   │   ├── sitemap.ts          # sitemap.xml généré dynamiquement
 │   │   └── robots.ts           # robots.txt (bloque /api/ et /admin/)
 │   ├── lib/
-│   │   ├── db.ts               # singleton PrismaClient (adapter SQLite)
+│   │   ├── db.ts               # singleton PrismaClient (adapter PostgreSQL @prisma/adapter-pg)
 │   │   ├── auth.ts             # JWT (jose) + hash password (bcryptjs)
 │   │   └── fonts.ts            # Cormorant Garamond · Geist · JetBrains Mono
 │   ├── data/
@@ -181,7 +188,8 @@ En-têtes HTTP configurés dans `next.config.ts` :
 - **sitemap.xml** : généré automatiquement via `src/app/sitemap.ts`
 - **robots.txt** : `/api/*` et `/admin/*` exclus de l'indexation (`src/app/robots.ts`)
 - **Skip link** : lien "Aller au contenu principal" masqué, visible au focus (premier élément tabulable)
-- **`page.tsx` Server Component** : la page d'accueil est statique ; `Header.tsx` gère son propre état mobile en interne
+- **`page.tsx` en `force-dynamic`** : la page d'accueil lit la DB (Neon) à la demande — le contenu édité depuis le dashboard admin apparaît sans redéploiement, et le build ne dépend pas de la DB. `Header.tsx` gère son propre état mobile en interne
+- **Favicon** : généré depuis le monogramme `logo-monogram.webp` (`src/app/icon.png`, `apple-icon.png`, `favicon.ico`) via `scripts/gen-favicon.cjs`
 
 ---
 
@@ -195,9 +203,17 @@ Les images sont servies en **WebP** depuis `public/images/` (PNG originaux exclu
 
 - [ ] Remplacer les 6 thumbnails vidéos (placeholders dans `VideoCard`)
 - [ ] Brancher les vrais liens sociaux (Instagram, LinkedIn, X)
-- [ ] Choisir une base de données persistante pour la prod (Turso / Neon — SQLite non persistant sur Vercel)
-- [ ] Configurer les variables d'env sur Vercel (`ADMIN_PASSWORD_HASH`, `ADMIN_JWT_SECRET`, `DATABASE_URL`)
-- [ ] Déploiement sur Vercel
+- [x] ~~Base de données persistante pour la prod~~ → **migré SQLite → PostgreSQL/Neon** (2026-06-15)
+- [x] ~~Variables d'env sur Vercel~~ → posées (DATABASE_URL, DIRECT_URL, ADMIN_JWT_SECRET, ADMIN_PASSWORD_HASH)
+- [x] ~~Déploiement sur Vercel~~ → **en ligne** (2026-06-15)
+
+## Historique — 2026-06-15
+
+- Migration **SQLite → PostgreSQL/Neon** : `schema.prisma` en `postgresql`, adapter `@prisma/adapter-pg`, URLs déplacées dans `prisma.config.ts`, migrations Postgres régénérées.
+- Page d'accueil passée en `force-dynamic` (contenu admin live, build indépendant de la DB).
+- `prisma migrate deploy` ajouté au script `build` (migrations auto sur Vercel).
+- **Favicon** créé depuis le monogramme (livre + plume).
+- **Déploiement Vercel + Neon** réussi.
 
 ## 🧪 Tests & Qualité
 
