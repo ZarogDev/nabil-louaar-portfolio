@@ -198,3 +198,11 @@ Les images sont servies en **WebP** depuis `public/images/` (PNG originaux exclu
 - [ ] Choisir une base de données persistante pour la prod (Turso / Neon — SQLite non persistant sur Vercel)
 - [ ] Configurer les variables d'env sur Vercel (`ADMIN_PASSWORD_HASH`, `ADMIN_JWT_SECRET`, `DATABASE_URL`)
 - [ ] Déploiement sur Vercel
+
+## 🧪 Tests & Qualité
+
+- **Tests unitaires** : `npm test` (Vitest).
+- **CI** : `.github/workflows/audit.yml` exécute `npm audit` (high/critical, informatif) + les tests à chaque push / PR.
+- **Sécurité** : headers HTTP de sécurité (CSP, HSTS, X-Frame-Options, X-Content-Type-Options…), `.env` jamais commité, validation Zod sur les routes de mutation.
+
+> Stack alignée sur le **standard ZarogDev** : Next.js 16 · React 19 · TypeScript · Tailwind · shadcn/ui + **MagicUI** · Prisma · Zod · Vitest.
