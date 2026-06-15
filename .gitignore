@@ -53,3 +53,7 @@ public/images/*.png
 *.db-journal
 *.db-wal
 *.db-shm
+
+# Fiches d'accès / identifiants — local uniquement, ne jamais committer
+*.local.html
+ACCES-*.html
