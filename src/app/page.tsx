@@ -7,6 +7,11 @@ import WritingSection from "@/components/sections/WritingSection";
 import VideoSection from "@/components/sections/VideoSection";
 import NewsletterSection from "@/components/sections/NewsletterSection";
 
+// Rendu à la demande : les sections lisent la DB (Neon), et le contenu édité
+// depuis le dashboard admin doit apparaître sans redéploiement. Évite aussi
+// toute dépendance à la DB lors du build (prérendu statique).
+export const dynamic = "force-dynamic";
+
 export default function HomePage() {
   return (
     <>
