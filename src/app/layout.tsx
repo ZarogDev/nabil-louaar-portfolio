@@ -77,13 +77,14 @@ const jsonLd = {
   url: BASE_URL,
   image: `${BASE_URL}/images/portrait-hero.webp`,
   description:
-    "Écrivain et réalisateur franco-algérien. Romans publiés chez Actes du Sud et P.O.L. Courts métrages sélectionnés à Cannes et Locarno.",
+    "Écrivain et réalisateur franco-algérien. Romans publiés chez P.O.L., Actes du Sud, Verticales et Mercure de France. Courts métrages sélectionnés à Cannes et Locarno.",
   jobTitle: ["Écrivain", "Réalisateur"],
   nationality: { "@type": "Country", name: "France" },
   birthPlace: { "@type": "Place", name: "Sétif, Algérie" },
   sameAs: [
     "https://www.instagram.com/nabillouaar",
     "https://www.linkedin.com/in/nabillouaar",
+    "https://x.com/nabillouaar",
   ],
   worksFor: [
     { "@type": "Organization", name: "Actes du Sud" },
@@ -114,6 +115,52 @@ const jsonLd = {
     name: "La Fémis",
     url: "https://www.femis.fr",
   },
+  workExample: [
+    {
+      "@type": "Book",
+      name: "Le Cabinet des heures claires",
+      datePublished: "2025",
+      publisher: { "@type": "Organization", name: "P.O.L." },
+      author: { "@type": "Person", name: "Nabil Louaar" },
+      inLanguage: "fr",
+      genre: "Roman",
+    },
+    {
+      "@type": "Book",
+      name: "Les Saisons renversées",
+      datePublished: "2022",
+      publisher: { "@type": "Organization", name: "Actes du Sud" },
+      author: { "@type": "Person", name: "Nabil Louaar" },
+      inLanguage: "fr",
+      genre: "Roman",
+      award: "Prix Méditerranée 2023",
+    },
+    {
+      "@type": "Book",
+      name: "Une géographie de la patience",
+      datePublished: "2019",
+      publisher: { "@type": "Organization", name: "Verticales" },
+      author: { "@type": "Person", name: "Nabil Louaar" },
+      inLanguage: "fr",
+      genre: "Récit",
+    },
+    {
+      "@type": "Book",
+      name: "Petites insomnies du sud",
+      datePublished: "2016",
+      publisher: { "@type": "Organization", name: "Mercure de France" },
+      author: { "@type": "Person", name: "Nabil Louaar" },
+      inLanguage: "fr",
+      genre: "Nouvelles",
+    },
+    {
+      "@type": "VideoObject",
+      name: "Filmographie — Nabil Louaar",
+      description: "Onze courts métrages et documentaires produits par Les Films du Worso, sélectionnés à Cannes et Locarno entre 2012 et 2025.",
+      director: { "@type": "Person", name: "Nabil Louaar" },
+      productionCompany: { "@type": "Organization", name: "Les Films du Worso" },
+    },
+  ],
 };
 
 export default function RootLayout({

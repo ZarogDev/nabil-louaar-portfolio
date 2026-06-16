@@ -5,7 +5,38 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 export default function NewsletterSection() {
-  const [email, setEmail] = useState("");
+  const [email,   setEmail]   = useState("");
+  const [status,  setStatus]  = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email) return;
+
+    setStatus("loading");
+    setMessage("");
+
+    try {
+      const res = await fetch("/api/newsletter", {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify({ email }),
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        setStatus("success");
+        setMessage("Inscription confirmée. À bientôt dans votre boîte.");
+        setEmail("");
+      } else {
+        setStatus("error");
+        setMessage(data.error ?? "Une erreur est survenue.");
+      }
+    } catch {
+      setStatus("error");
+      setMessage("Impossible de joindre le serveur.");
+    }
+  }
 
   return (
     <section
@@ -33,7 +64,7 @@ export default function NewsletterSection() {
 
         {/* Droite : formulaire */}
         <form
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={handleSubmit}
           className="flex flex-col gap-[14px] border-t border-[var(--color-hair)] pt-6"
         >
           <div className="flex justify-between items-baseline">
@@ -46,44 +77,58 @@ export default function NewsletterSection() {
           </div>
 
           <div className="flex gap-[14px] items-stretch">
-            {/* shadcn Input — styles surchargés pour coller au design */}
             <Input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="prénom@domaine.fr"
               aria-label="Adresse électronique"
+              required
+              disabled={status === "loading" || status === "success"}
               className="flex-1 rounded-none border-0 border-b border-[var(--color-hair)] bg-transparent
                          px-1 py-[18px] pb-[16px] h-auto shadow-none
                          font-serif text-2xl text-[var(--color-ink)]
                          placeholder:text-[#9a9890] placeholder:italic placeholder:font-light
-                         focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-[var(--color-ink)]"
+                         focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-[var(--color-ink)]
+                         disabled:opacity-50"
             />
-
-            {/* shadcn Button — variant outline personnalisé */}
             <Button
               type="submit"
               variant="outline"
+              disabled={status === "loading" || status === "success"}
               className="rounded-none border border-[var(--color-hair)] bg-transparent text-[var(--color-ink)]
                          px-7 h-auto font-mono text-[11px] tracking-[.22em] uppercase
                          hover:bg-[var(--color-ink)] hover:text-[var(--color-paper)]
-                         transition-colors duration-200"
+                         transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              S&apos;abonner
+              {status === "loading" ? "…" : "S'abonner"}
             </Button>
           </div>
 
-          <div className="flex justify-between text-[var(--color-soft)] mt-2">
-            <span className="flex gap-[10px] items-center">
-              <span className="w-3 h-3 border border-[var(--color-soft)] inline-block relative after:content-[''] after:absolute after:inset-[2px] after:bg-[var(--color-ink)]" />
-              <span className="font-mono text-[11px] tracking-[.05em] normal-case">
-                J&apos;accepte de recevoir la lettre saisonnière
+          {/* Feedback */}
+          {message && (
+            <p
+              className={`font-mono text-[11px] tracking-[.05em] ${
+                status === "success" ? "text-[var(--color-ink)]" : "text-red-600"
+              }`}
+            >
+              {message}
+            </p>
+          )}
+
+          {status !== "success" && (
+            <div className="flex justify-between text-[var(--color-soft)] mt-2">
+              <span className="flex gap-[10px] items-center">
+                <span className="w-3 h-3 border border-[var(--color-soft)] inline-block relative after:content-[''] after:absolute after:inset-[2px] after:bg-[var(--color-ink)]" />
+                <span className="font-mono text-[11px] tracking-[.05em] normal-case">
+                  J&apos;accepte de recevoir la lettre saisonnière
+                </span>
               </span>
-            </span>
-            <span className="font-mono text-[11px] tracking-[.18em] uppercase">
-              Désinscription · un clic
-            </span>
-          </div>
+              <span className="font-mono text-[11px] tracking-[.18em] uppercase">
+                Désinscription · un clic
+              </span>
+            </div>
+          )}
         </form>
 
       </div>

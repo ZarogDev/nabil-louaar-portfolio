@@ -120,10 +120,19 @@ export default function NavigationOverlay({ isOpen, onClose }: NavigationOverlay
             Ailleurs
           </h5>
           <ul className="list-none flex flex-col gap-[10px]">
-            {["Instagram ↗", "LinkedIn ↗", "X ↗"].map((link) => (
-              <li key={link}>
-                <a href="#" className="font-serif text-[18px] text-[#e9e5da] hover:text-white">
-                  {link}
+            {[
+              { label: "Instagram ↗", href: "https://www.instagram.com/nabillouaar" },
+              { label: "LinkedIn ↗",  href: "https://www.linkedin.com/in/nabillouaar" },
+              { label: "X ↗",         href: "https://x.com/nabillouaar" },
+            ].map(({ label, href }) => (
+              <li key={label}>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-serif text-[18px] text-[#e9e5da] hover:text-white transition-colors"
+                >
+                  {label}
                 </a>
               </li>
             ))}

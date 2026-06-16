@@ -1,19 +1,28 @@
 import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { getPasswordHash, requireAdmin } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 
+const schema = z.object({
+  currentPassword: z.string().min(1),
+  newPassword:     z.string().min(12, "Le mot de passe doit faire au moins 12 caractères.").max(128),
+});
+
 export async function POST(request: NextRequest) {
   if (!await requireAdmin(request)) return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
-  const { currentPassword, newPassword } = await request.json().catch(() => ({}));
 
-  if (!currentPassword || !newPassword) {
-    return NextResponse.json({ error: "Champs requis." }, { status: 400 });
+  const body = await request.json().catch(() => ({}));
+  const result = schema.safeParse(body);
+
+  if (!result.success) {
+    return NextResponse.json(
+      { error: result.error.issues[0]?.message ?? "Données invalides." },
+      { status: 400 }
+    );
   }
 
-  if (newPassword.length < 12) {
-    return NextResponse.json({ error: "Le mot de passe doit faire au moins 12 caractères." }, { status: 400 });
-  }
+  const { currentPassword, newPassword } = result.data;
 
   const hash = await getPasswordHash();
   if (!hash) {

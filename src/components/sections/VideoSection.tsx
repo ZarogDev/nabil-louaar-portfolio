@@ -28,7 +28,7 @@ export default async function VideoSection() {
         <span className="font-mono text-[11px] tracking-[.18em] uppercase text-[var(--color-soft)]">
           {videos.length} film{videos.length !== 1 ? "s" : ""}
         </span>
-        <a href="#" className="font-serif text-[18px] italic hover:opacity-70">
+        <a href="#video" className="font-serif text-[18px] italic hover:opacity-70">
           <span className="border-b border-[var(--color-ink)] pb-px">
             Voir la filmographie complète
           </span>

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface DbVideo {
   id: number;
   title: string;
@@ -40,11 +42,12 @@ export default function VideoCard({ video, index }: VideoCardProps) {
     <a href={href} target={video.videoUrl ? "_blank" : undefined} rel="noopener noreferrer" className="block cursor-pointer group">
       <div className="relative aspect-video overflow-hidden bg-[#1a1a1a] border border-[#2a2a2a]">
         {video.thumbnailUrl ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Image
             src={video.thumbnailUrl}
             alt={video.title}
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
           <div className="absolute inset-0 bg-[#1a1a1a] flex items-center justify-center">
@@ -66,9 +69,7 @@ export default function VideoCard({ video, index }: VideoCardProps) {
       </div>
 
       <div className="flex justify-between items-end mt-[18px] gap-5">
-        <h3
-          className="font-serif font-normal text-2xl leading-[1.15] tracking-[-0.005em] max-w-[18ch]"
-        >
+        <h3 className="font-serif font-normal text-2xl leading-[1.15] tracking-[-0.005em] max-w-[18ch]">
           {video.title}
         </h3>
         <span className="font-mono text-[10.5px] tracking-[.2em] uppercase text-[var(--color-soft)] text-right whitespace-nowrap">

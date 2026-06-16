@@ -5,6 +5,7 @@ import HeroSection from "@/components/sections/HeroSection";
 import PresentationSection from "@/components/sections/PresentationSection";
 import WritingSection from "@/components/sections/WritingSection";
 import VideoSection from "@/components/sections/VideoSection";
+import FaqSection from "@/components/sections/FaqSection";
 import NewsletterSection from "@/components/sections/NewsletterSection";
 
 // Rendu à la demande : les sections lisent la DB (Neon), et le contenu édité
@@ -22,6 +23,7 @@ export default function HomePage() {
         <PresentationSection />
         <WritingSection />
         <VideoSection />
+        <FaqSection />
         <NewsletterSection />
       </main>
 
