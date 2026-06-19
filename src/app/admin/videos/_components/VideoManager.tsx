@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 interface Video {
   id: number;
@@ -121,9 +122,9 @@ export default function VideoManager({ initialVideos }: { initialVideos: Video[]
         {videos.map((v) => (
           <div key={v.id} className="flex items-center gap-4 bg-[#161614] border border-[#1f1d1a] px-5 py-4 hover:border-[#3a3a35] transition-colors">
             {/* Miniature vignette */}
-            <div className="w-[64px] h-[36px] shrink-0 bg-[#1a1a1a] overflow-hidden border border-[#2a2a26]">
+            <div className="w-[64px] h-[36px] shrink-0 bg-[#1a1a1a] overflow-hidden border border-[#2a2a26] relative">
               {v.thumbnailUrl
-                ? <img src={v.thumbnailUrl} alt="" className="w-full h-full object-cover" />
+                ? <Image src={v.thumbnailUrl} alt="" fill className="object-cover" sizes="64px" />
                 : <div className="w-full h-full flex items-center justify-center">
                     <span className="text-[#3a3a38] text-[8px] font-mono">—</span>
                   </div>
@@ -209,10 +210,12 @@ export default function VideoManager({ initialVideos }: { initialVideos: Video[]
                 {thumbSrc && (
                   <div className="mb-2 relative aspect-video w-full bg-[#0f0f0e] border border-[#2a2a26] overflow-hidden">
                     {!thumbError ? (
-                      <img
+                      <Image
                         src={thumbSrc}
                         alt="Aperçu miniature"
-                        className="w-full h-full object-cover"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 640px) 100vw, 580px"
                         onError={() => {
                           // Fallback : hqdefault si maxresdefault absent (vidéo sans HD)
                           const id = ytIdPreview || extractYoutubeId(thumbSrc);
