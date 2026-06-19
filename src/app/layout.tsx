@@ -91,18 +91,6 @@ const jsonLd = {
     { "@type": "Organization", name: "P.O.L." },
     { "@type": "Organization", name: "Les Films du Worso" },
   ],
-  hasOccupation: [
-    {
-      "@type": "Occupation",
-      name: "Écrivain",
-      occupationLocation: { "@type": "Country", name: "France" },
-    },
-    {
-      "@type": "Occupation",
-      name: "Réalisateur de cinéma",
-      occupationLocation: { "@type": "Country", name: "France" },
-    },
-  ],
   knowsAbout: [
     "Littérature francophone",
     "Cinéma d'auteur",
@@ -115,6 +103,18 @@ const jsonLd = {
     name: "La Fémis",
     url: "https://www.femis.fr",
   },
+  hasOccupation: [
+    {
+      "@type": "Occupation",
+      name: "Écrivain",
+      occupationLocation: { "@type": "Country", name: "France" },
+    },
+    {
+      "@type": "Occupation",
+      name: "Réalisateur de cinéma",
+      occupationLocation: { "@type": "Country", name: "France" },
+    },
+  ],
   workExample: [
     {
       "@type": "Book",
@@ -163,6 +163,45 @@ const jsonLd = {
   ],
 };
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Où acheter les romans de Nabil Louaar ?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Les romans de Nabil Louaar sont disponibles en librairie et sur les principales plateformes en ligne (Amazon, Fnac, Decitre). Ses œuvres sont publiées chez P.O.L., Actes du Sud, Verticales et Mercure de France.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Comment contacter Nabil Louaar pour une invitation ou une rencontre littéraire ?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Vous pouvez contacter Nabil Louaar via le formulaire de contact sur ce site ou en passant par ses éditeurs (P.O.L. pour les demandes littéraires, Les Films du Worso pour les projets cinématographiques).",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Quels prix a reçu Nabil Louaar ?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Nabil Louaar a reçu le Prix Méditerranée 2023 pour son roman « Les Saisons renversées » (Actes du Sud, 2022). Ses courts métrages ont été sélectionnés et primés aux festivals de Cannes et Locarno.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Nabil Louaar propose-t-il des ateliers d'écriture ou des conférences ?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Oui, Nabil Louaar intervient régulièrement dans des lycées, universités et festivals littéraires pour des ateliers d'écriture et des rencontres avec le public. Contactez-le via ce site pour toute demande.",
+      },
+    },
+  ],
+};
+
 import RouteScrollReset from "@/components/RouteScrollReset";
 
 export default function RootLayout({
@@ -177,6 +216,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
       </head>
       <body suppressHydrationWarning>
