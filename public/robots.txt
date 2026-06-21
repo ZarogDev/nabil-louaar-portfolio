@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nabil-louaar.vercel.app/sitemap.xml
