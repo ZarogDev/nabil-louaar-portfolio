@@ -1,6 +1,6 @@
 // middleware.ts must be named exactly this — Next.js 16 still uses this convention.
 import { NextRequest, NextResponse } from "next/server";
-import { verifyAdminToken, COOKIE_NAME } from "@/lib/auth";
+import { verifyAdminToken, COOKIE_NAME } from "@/lib/auth-edge";
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
