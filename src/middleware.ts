@@ -1,8 +1,8 @@
-// Next.js 16 renamed middleware.ts → proxy.ts with a named export `proxy`.
+// middleware.ts must be named exactly this — Next.js 16 still uses this convention.
 import { NextRequest, NextResponse } from "next/server";
 import { verifyAdminToken, COOKIE_NAME } from "@/lib/auth";
 
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (pathname === "/admin/login") return NextResponse.next();
