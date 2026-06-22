@@ -31,6 +31,13 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  serverExternalPackages: [
+    "@prisma/client",
+    "@prisma/adapter-pg",
+    "pg",
+    "pg-native",
+    "bcryptjs",
+  ],
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
