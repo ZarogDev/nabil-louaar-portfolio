@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 const BASE_URL = "https://nabillouaar.fr";
 
 // Fixed date: only update when content actually changes.
-const SITE_LAST_MODIFIED = new Date("2026-06-16");
+const SITE_LAST_MODIFIED = new Date("2026-06-22");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

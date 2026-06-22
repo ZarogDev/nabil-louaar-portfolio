@@ -21,16 +21,7 @@ const faqs = [
   },
 ];
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map(({ question, answer }) => ({
-    "@type": "Question",
-    name: question,
-    acceptedAnswer: { "@type": "Answer", text: answer },
-  })),
-};
-
+// JSON-LD FAQPage injecté une seule fois dans layout.tsx (head) — pas de doublon ici.
 export default function FaqSection() {
   return (
     <section
@@ -38,11 +29,6 @@ export default function FaqSection() {
       className="bg-[var(--color-paper)] border-t border-[var(--color-rule)]
                  px-[clamp(28px,6vw,120px)] py-[clamp(80px,9vw,130px)]"
     >
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-
       <div className="max-w-[1640px] mx-auto">
         <div className="mb-[clamp(40px,5vw,70px)]">
           <span className="block font-mono text-[11px] tracking-[.18em] uppercase text-[var(--color-soft)] mb-5">

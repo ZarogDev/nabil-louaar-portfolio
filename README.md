@@ -9,6 +9,7 @@ Site portfolio de **Nabil Louaar**, écrivain et réalisateur franco-algérien.
 > Pour les conventions de code, l'organisation détaillée de l'architecture, la structure Tailwind CSS v4 ou les instructions pour ajouter une nouvelle section UI, consultez le guide des [Conventions du Projet](file:///d:/Projets_App/nabil-louaar-portfolio/CONVENTIONS.md).
 
 **Repo :** [github.com/ZarogDev/nabil-louaar-portfolio](https://github.com/ZarogDev/nabil-louaar-portfolio)
+**Prod :** [nabillouaar.fr](https://nabillouaar.fr) — déployé sur Vercel + Neon (en ligne depuis le 2026-06-15)
 
 ---
 
@@ -110,7 +111,6 @@ nabil/
 │       │   └── NewsletterSection.tsx# formulaire inscription + contact
 │       └── nabil/
 │           ├── SectionHeader.tsx    # en-tête de section (label + titre)
-│           ├── MicroLabel.tsx       # étiquette typographique small caps
 │           ├── BookShelf.tsx        # étagère interactive (useState)
 │           └── VideoCard.tsx        # carte vidéo avec thumbnail + overlay
 ├── next.config.ts              # en-têtes HTTP de sécurité (CSP, HSTS…)
@@ -159,7 +159,7 @@ Les tokens sont définis dans [`src/app/globals.css`](src/app/globals.css) via l
 Accessible via l'icône cadenas dans la navbar (`/admin/login`).
 
 - **Auth** : mot de passe unique stocké en hash bcrypt (env var `ADMIN_PASSWORD_HASH`, surcharge possible via DB `AdminConfig`)
-- **JWT** : cookie httpOnly/secure/sameSite:strict, 7 jours
+- **JWT** : cookie httpOnly/secure/sameSite:strict, 8 heures (`COOKIE_MAX_AGE = 60 * 60 * 8` dans `lib/auth.ts`)
 - **Protection pages** : toutes les routes `/admin/*` sauf `/admin/login` sont protégées par `src/proxy.ts` (Next.js 16 middleware)
 - **Protection API** : chaque handler `/api/admin/*` appelle `requireAdmin()` (`src/lib/auth.ts`) — le middleware Edge ne couvre pas les routes API
 - **ADMIN_JWT_SECRET** : obligatoire — le serveur lance une erreur au démarrage si absent
@@ -201,11 +201,13 @@ Les images sont servies en **WebP** depuis `public/images/` (PNG originaux exclu
 
 ## Ce qui reste à faire
 
-- [ ] Remplacer les 6 thumbnails vidéos (placeholders dans `VideoCard`)
-- [ ] Brancher les vrais liens sociaux (Instagram, LinkedIn, X)
+- [ ] Remplacer les 6 thumbnails vidéos (placeholders dans `VideoCard`) — ajouter les vraies URLs YouTube depuis le dashboard admin
+- [ ] Brancher les vrais liens sociaux (Instagram, LinkedIn, X) dans `Footer.tsx` et `NavigationOverlay.tsx`
+- [ ] Ajouter un lien "Voir la filmographie complète" vers une vraie page ou ancre (actuellement pointe sur `#video`)
 - [x] ~~Base de données persistante pour la prod~~ → **migré SQLite → PostgreSQL/Neon** (2026-06-15)
 - [x] ~~Variables d'env sur Vercel~~ → posées (DATABASE_URL, DIRECT_URL, ADMIN_JWT_SECRET, ADMIN_PASSWORD_HASH)
 - [x] ~~Déploiement sur Vercel~~ → **en ligne** (2026-06-15)
+- [x] ~~Code mort~~ → `src/data/videos.ts` supprimé (2026-06-22), doublon JSON-LD FAQPage retiré de `FaqSection`
 
 ## Historique — 2026-06-15
 
