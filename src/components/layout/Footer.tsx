@@ -1,4 +1,4 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 
 const navLinks = ["Accueil", "Présentation", "Écriture", "Vidéo"];
 const navHrefs = ["#home", "#presentation", "#ecriture", "#video"];
@@ -90,7 +90,7 @@ export default function Footer() {
         <span>© Nabil Louaar — 2026</span>
         <span className="tracking-[.14em] normal-case text-[10px]">
           © 2026 ZarogDev. Agence digitale — design &amp; développement signés ZarogDev.{" "}
-          <a href="mailto:contact@zarogdev.fr" className="hover:text-[#a8a59d] transition-colors underline underline-offset-2">
+          <a href="mailto:zarogdev@gmail.com" className="hover:text-[#a8a59d] transition-colors underline underline-offset-2">
             contact@zarogdev.fr
           </a>
         </span>
