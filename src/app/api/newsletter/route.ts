@@ -18,7 +18,7 @@ function getClientIp(request: NextRequest): string {
 export async function POST(request: NextRequest) {
   const ip = getClientIp(request);
   // Rate limit : 5 inscriptions max par IP sur 15 minutes
-  const { allowed, retryAfter } = checkRateLimit(`newsletter:${ip}`);
+  const { allowed, retryAfter } = await checkRateLimit(`newsletter:${ip}`);
   if (!allowed) {
     return NextResponse.json(
       { error: `Trop de tentatives. Réessayez dans ${retryAfter} secondes.` },

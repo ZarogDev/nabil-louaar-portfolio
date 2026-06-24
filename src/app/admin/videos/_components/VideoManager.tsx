@@ -124,7 +124,7 @@ export default function VideoManager({ initialVideos }: { initialVideos: Video[]
             {/* Miniature vignette */}
             <div className="w-[64px] h-[36px] shrink-0 bg-[#1a1a1a] overflow-hidden border border-[#2a2a26] relative">
               {v.thumbnailUrl
-                ? <Image src={v.thumbnailUrl} alt="" fill className="object-cover" sizes="64px" />
+                ? <Image src={v.thumbnailUrl} alt={`Miniature — ${v.title}`} fill className="object-cover" sizes="64px" />
                 : <div className="w-full h-full flex items-center justify-center">
                     <span className="text-[#3a3a38] text-[8px] font-mono">—</span>
                   </div>

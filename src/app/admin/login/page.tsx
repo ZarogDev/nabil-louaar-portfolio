@@ -12,6 +12,12 @@ function LoginForm() {
   const [error, setError]       = useState("");
   const [loading, setLoading]   = useState(false);
 
+  // Validate redirect target: only allow relative paths starting with /admin
+  const safeRedirect = (target: string): string => {
+    if (typeof target === "string" && target.startsWith("/admin")) return target;
+    return "/admin";
+  };
+
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setError("");
@@ -25,7 +31,7 @@ function LoginForm() {
       });
 
       if (res.ok) {
-        router.replace(from);
+        router.replace(safeRedirect(from));
       } else {
         const { error: msg } = await res.json();
         setError(msg ?? "Erreur de connexion.");

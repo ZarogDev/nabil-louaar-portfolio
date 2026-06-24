@@ -13,7 +13,7 @@ function getClientIp(request: NextRequest): string {
 
 export async function POST(request: NextRequest) {
   const ip = getClientIp(request);
-  const { allowed, retryAfter } = checkRateLimit(ip);
+  const { allowed, retryAfter } = await checkRateLimit(ip);
 
   if (!allowed) {
     return NextResponse.json(
@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
   }
 
   // Reset counter on successful login
-  resetRateLimit(ip);
+  await resetRateLimit(ip);
 
   const token = await signAdminToken();
   const response = NextResponse.json({ ok: true });

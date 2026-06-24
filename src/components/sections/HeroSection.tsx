@@ -34,6 +34,15 @@ export default function HeroSection() {
             produits entre Paris et Alger depuis douze ans — pour la page, pour l&apos;écran,
             et pour les voix qui résistent au silence.
           </p>
+
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-3 mt-8 font-mono text-[11px] tracking-[.22em] uppercase text-[#f4f1ea] border border-[#2a2a26] px-5 py-3 hover:bg-[#f4f1ea] hover:text-[#0a0a0a] transition-colors duration-200"
+            aria-label="Aller à la section contact pour s'inscrire à la lettre de Nabil Louaar"
+          >
+            <span className="w-[18px] h-px bg-current" />
+            Suivre l&apos;actualité
+          </a>
         </div>
 
         {/* Stats grid */}
@@ -53,7 +62,7 @@ export default function HeroSection() {
       <div className="relative overflow-hidden bg-[#0a0a0a] h-[70vh] lg:h-auto">
         <Image
           src="/images/portrait-hero.webp"
-          alt="Portrait — Nabil Louaar"
+          alt="Portrait de Nabil Louaar, écrivain et réalisateur franco-algérien, Paris 2025"
           fill
           className="object-cover grayscale contrast-[1.05]"
           priority

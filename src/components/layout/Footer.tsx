@@ -7,9 +7,9 @@ const contactLinks = [
   { label: "Agent — c.mercier@m-l.fr",  href: "mailto:c.mercier@m-l.fr" },
 ];
 const socialLinks = [
-  { label: "Instagram ↗", href: "https://www.instagram.com/nabillouaar" },
-  { label: "LinkedIn ↗", href: "https://www.linkedin.com/in/nabillouaar" },
-  { label: "X ↗", href: "https://x.com/nabillouaar" },
+  { label: "Instagram ↗", href: "https://www.instagram.com/nabillouaar", ariaLabel: "Nabil Louaar sur Instagram (nouvelle fenêtre)" },
+  { label: "LinkedIn ↗", href: "https://www.linkedin.com/in/nabillouaar", ariaLabel: "Nabil Louaar sur LinkedIn (nouvelle fenêtre)" },
+  { label: "X ↗", href: "https://x.com/nabillouaar", ariaLabel: "Nabil Louaar sur X / Twitter (nouvelle fenêtre)" },
 ];
 
 export default function Footer() {
@@ -69,12 +69,13 @@ export default function Footer() {
             Ailleurs
           </h4>
           <ul className="list-none flex flex-col gap-2">
-            {socialLinks.map(({ label, href }) => (
+            {socialLinks.map(({ label, href, ariaLabel }) => (
               <li key={label}>
                 <a
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={ariaLabel}
                   className="font-serif text-[18px] text-[#e9e5da] hover:text-white transition-colors"
                 >
                   {label}

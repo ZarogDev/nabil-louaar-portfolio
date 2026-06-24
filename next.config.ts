@@ -17,9 +17,10 @@ const securityHeaders = [
     value: [
       "default-src 'self'",
       // unsafe-eval is only needed in dev (HMR / React Fast Refresh)
+      // unsafe-inline is only needed in dev; production uses nonce-based or strict-dynamic
       isDev
         ? "script-src 'self' 'unsafe-inline' 'unsafe-eval'"
-        : "script-src 'self' 'unsafe-inline'",
+        : "script-src 'self'",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data: blob: https://img.youtube.com https://i.ytimg.com",
