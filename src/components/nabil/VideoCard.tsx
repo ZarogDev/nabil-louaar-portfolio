@@ -19,8 +19,9 @@ interface VideoCardProps {
   index: number;
 }
 
-const PlayIcon = () => (
-  <svg viewBox="0 0 64 64" className="w-16 h-16">
+const PlayIcon = ({ title }: { title: string }) => (
+  <svg viewBox="0 0 64 64" className="w-16 h-16" role="img" aria-label={`Lire ${title}`}>
+    <title>{`Lire ${title}`}</title>
     <circle cx="32" cy="32" r="31" stroke="#f4f1ea" strokeWidth="1" fill="none" />
     <polygon
       points="26,20 26,44 46,32"
@@ -44,7 +45,7 @@ export default function VideoCard({ video, index }: VideoCardProps) {
         {video.thumbnailUrl ? (
           <Image
             src={video.thumbnailUrl}
-            alt={video.title}
+            alt={`Nabil Louaar — ${video.title} (${video.type}, ${video.year})`}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -64,7 +65,7 @@ export default function VideoCard({ video, index }: VideoCardProps) {
           {indexLabel}
         </span>
         <span className="absolute inset-0 grid place-items-center pointer-events-none">
-          <PlayIcon />
+          <PlayIcon title={video.title} />
         </span>
       </div>
 

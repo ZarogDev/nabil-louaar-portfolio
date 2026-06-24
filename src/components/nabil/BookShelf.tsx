@@ -53,6 +53,8 @@ export default function BookShelf({ books }: BookShelfProps) {
             <button
               key={book.id}
               onClick={() => setActiveId(idx)}
+              aria-label={`Voir le détail de ${book.title.replace(/<[^>]+>/g, "")} — ${book.pub}`}
+              aria-pressed={activeId === idx}
               style={{ width: book.width, height: book.height }}
               className={cn(
                 "relative flex flex-col items-center justify-between py-[22px]",

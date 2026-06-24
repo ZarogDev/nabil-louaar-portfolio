@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 
 interface NavigationOverlayProps {
@@ -17,14 +17,24 @@ const navItems = [
 ];
 
 export default function NavigationOverlay({ isOpen, onClose }: NavigationOverlayProps) {
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
-    if (isOpen) document.addEventListener("keydown", handleKey);
+    if (isOpen) {
+      document.addEventListener("keydown", handleKey);
+      // Focus le bouton Fermer à l'ouverture pour le clavier
+      setTimeout(() => closeButtonRef.current?.focus(), 50);
+    }
     return () => document.removeEventListener("keydown", handleKey);
   }, [isOpen, onClose]);
 
   return (
     <div
+      id="navigation-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu de navigation"
       aria-hidden={!isOpen}
       className={`fixed inset-0 z-[100] bg-[#0a0a0a] text-[#f4f1ea]
                   grid grid-cols-1 lg:grid-cols-2
@@ -36,7 +46,7 @@ export default function NavigationOverlay({ isOpen, onClose }: NavigationOverlay
         {/* Top */}
         <div className="flex justify-between items-center">
           <span className="flex items-center gap-[14px] text-[#f4f1ea]">
-            <Image src="/images/logo-monogram-transparent.webp" alt="" width={42} height={42} />
+            <Image src="/images/logo-monogram-transparent.webp" alt="Nabil Louaar — monogramme NL" width={42} height={42} />
             <span className="font-serif font-medium text-[18px] leading-none">
               Nabil Louaar
               <small className="block font-mono text-[9.5px] tracking-[.24em] uppercase text-[#a8a59d] mt-[6px] font-normal">
@@ -45,7 +55,9 @@ export default function NavigationOverlay({ isOpen, onClose }: NavigationOverlay
             </span>
           </span>
           <button
+            ref={closeButtonRef}
             onClick={onClose}
+            aria-label="Fermer le menu de navigation"
             className="font-mono text-[11px] tracking-[.24em] uppercase text-[#a8a59d] cursor-pointer inline-flex items-center gap-3"
           >
             Fermer
@@ -101,7 +113,7 @@ export default function NavigationOverlay({ isOpen, onClose }: NavigationOverlay
           <div className="w-full max-w-[380px] aspect-[2/3] overflow-hidden border border-[#1f1d1a] relative">
             <Image
               src="/images/portrait-menu.webp"
-              alt="Nabil Louaar"
+              alt="Portrait de Nabil Louaar, écrivain et réalisateur franco-algérien"
               fill
               className="object-cover object-top grayscale"
               sizes="(max-width: 1024px) 0px, min(380px, 40vw)"
@@ -121,15 +133,16 @@ export default function NavigationOverlay({ isOpen, onClose }: NavigationOverlay
           </h5>
           <ul className="list-none flex flex-col gap-[10px]">
             {[
-              { label: "Instagram ↗", href: "https://www.instagram.com/nabillouaar" },
-              { label: "LinkedIn ↗",  href: "https://www.linkedin.com/in/nabillouaar" },
-              { label: "X ↗",         href: "https://x.com/nabillouaar" },
-            ].map(({ label, href }) => (
+              { label: "Instagram ↗", href: "https://www.instagram.com/nabillouaar", ariaLabel: "Nabil Louaar sur Instagram (nouvelle fenêtre)" },
+              { label: "LinkedIn ↗",  href: "https://www.linkedin.com/in/nabillouaar", ariaLabel: "Nabil Louaar sur LinkedIn (nouvelle fenêtre)" },
+              { label: "X ↗",         href: "https://x.com/nabillouaar", ariaLabel: "Nabil Louaar sur X / Twitter (nouvelle fenêtre)" },
+            ].map(({ label, href, ariaLabel }) => (
               <li key={label}>
                 <a
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={ariaLabel}
                   className="font-serif text-[18px] text-[#e9e5da] hover:text-white transition-colors"
                 >
                   {label}

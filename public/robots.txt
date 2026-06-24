@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nabil-louaar.vercel.app/sitemap.xml
+# Bloquer l'accès à l'administration
+Disallow: /admin/
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://nabillouaar.fr/sitemap.xml
