@@ -96,12 +96,11 @@ export default function Footer() {
             contact@zarogdev.fr
           </a>
         </span>
-      </div>
-    
-      <div className="mt-8 pt-4 flex flex-wrap justify-center gap-4 text-xs opacity-50 w-full border-t border-current border-opacity-10">
-        <Link href="/mentions-legales" className="hover:opacity-100 transition-opacity">Mentions Légales</Link>
-        <Link href="/politique-confidentialite" className="hover:opacity-100 transition-opacity">Politique de Confidentialité</Link>
-        <Link href="/cgu" className="hover:opacity-100 transition-opacity">CGU</Link>
+        <nav className="flex gap-5">
+          <Link href="/mentions-legales" className="text-[9px] tracking-[.18em] uppercase text-[#5a5752] hover:text-[#a8a59d] transition-colors">Mentions légales</Link>
+          <Link href="/politique-confidentialite" className="text-[9px] tracking-[.18em] uppercase text-[#5a5752] hover:text-[#a8a59d] transition-colors">Confidentialité</Link>
+          <Link href="/cgu" className="text-[9px] tracking-[.18em] uppercase text-[#5a5752] hover:text-[#a8a59d] transition-colors">CGU</Link>
+        </nav>
       </div>
     </footer>
   );

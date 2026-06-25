@@ -6,34 +6,68 @@ export default function CookieConsent() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    const consent = localStorage.getItem('cookie-consent');
-    if (!consent) {
-      setShow(true);
-    }
+    if (!localStorage.getItem('cookie-consent')) setShow(true);
   }, []);
 
-  const acceptAll = () => {
-    localStorage.setItem('cookie-consent', 'accepted');
-    setShow(false);
-  };
-
-  const declineAll = () => {
-    localStorage.setItem('cookie-consent', 'declined');
-    setShow(false);
-  };
+  const accept = () => { localStorage.setItem('cookie-consent', 'accepted'); setShow(false); };
+  const decline = () => { localStorage.setItem('cookie-consent', 'declined'); setShow(false); };
 
   if (!show) return null;
 
   return (
-    <div className="fixed bottom-4 left-4 z-[9999] max-w-sm p-5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-2xl flex flex-col gap-3 font-sans text-xs text-zinc-600 dark:text-zinc-300">
-      <p className="leading-relaxed">
-        Nous utilisons des cookies pour assurer le bon fonctionnement du site et améliorer votre expérience. <Link href="/politique-confidentialite" className="underline font-medium hover:text-zinc-900 dark:hover:text-white transition-colors">En savoir plus</Link>.
+    <div
+      role="dialog"
+      aria-label="Consentement cookies"
+      style={{
+        position: 'fixed',
+        bottom: '28px',
+        right: '28px',
+        zIndex: 9999,
+        maxWidth: '280px',
+        background: '#fbfaf7',
+        border: '1px solid #d8d5cd',
+        padding: '18px 20px',
+        boxShadow: '0 4px 20px rgba(10,10,10,0.12)',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '14px',
+      }}
+    >
+      <p style={{ fontFamily: 'var(--font-serif, serif)', fontSize: '12px', lineHeight: 1.65, color: '#6b6860', margin: 0 }}>
+        Ce site utilise des cookies de mesure d&apos;audience.{' '}
+        <Link
+          href="/politique-confidentialite"
+          style={{ color: '#0a0a0a', textDecoration: 'underline', textUnderlineOffset: '2px', textDecorationColor: '#d8d5cd' }}
+        >
+          En savoir plus
+        </Link>
       </p>
-      <div className="flex items-center gap-2 mt-1">
-        <button onClick={acceptAll} className="flex-1 py-2 bg-zinc-900 dark:bg-white text-white dark:text-black rounded-lg hover:opacity-90 transition-opacity font-medium">
+      <div style={{ display: 'flex', gap: '8px' }}>
+        <button
+          onClick={accept}
+          style={{
+            flex: 1, padding: '8px 0',
+            background: '#0a0a0a', color: '#fbfaf7',
+            border: 'none',
+            fontFamily: 'var(--font-mono, monospace)',
+            fontSize: '9.5px', letterSpacing: '0.15em', textTransform: 'uppercase',
+            cursor: 'pointer',
+          }}
+        >
           Accepter
         </button>
-        <button onClick={declineAll} className="flex-1 py-2 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors">
+        <button
+          onClick={decline}
+          style={{
+            flex: 1, padding: '8px 0',
+            background: 'transparent',
+            color: '#c5c2bb',
+            border: '1px solid #d8d5cd',
+            fontFamily: 'var(--font-mono, monospace)',
+            fontSize: '9.5px', letterSpacing: '0.15em', textTransform: 'uppercase',
+            cursor: 'pointer',
+          }}
+        >
           Refuser
         </button>
       </div>
