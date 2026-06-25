@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Image from "next/image";
 
 const navLinks = ["Accueil", "Présentation", "Écriture", "Vidéo"];
@@ -95,6 +96,12 @@ export default function Footer() {
             contact@zarogdev.fr
           </a>
         </span>
+      </div>
+    
+      <div className="mt-8 pt-4 flex flex-wrap justify-center gap-4 text-xs opacity-50 w-full border-t border-current border-opacity-10">
+        <Link href="/mentions-legales" className="hover:opacity-100 transition-opacity">Mentions Légales</Link>
+        <Link href="/politique-confidentialite" className="hover:opacity-100 transition-opacity">Politique de Confidentialité</Link>
+        <Link href="/cgu" className="hover:opacity-100 transition-opacity">CGU</Link>
       </div>
     </footer>
   );

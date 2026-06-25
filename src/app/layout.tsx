@@ -1,3 +1,4 @@
+import CookieConsent from '@/components/rgpd/CookieConsent';
 import type { Metadata } from "next";
 import { cormorant, geist, jetbrainsMono } from "@/lib/fonts";
 import "./globals.css";
@@ -231,6 +232,7 @@ export default function RootLayout({
           Aller au contenu
         </a>
         {children}
+        <CookieConsent />
       </body>
     </html>
   );
