@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { cn } from "@/lib/utils";
+import { cn, sanitizeEmphasisOnly } from "@/lib/utils";
 
 export interface BookItem {
   id: number;
@@ -71,7 +71,7 @@ export default function BookShelf({ books }: BookShelfProps) {
               <span
                 className="[writing-mode:vertical-rl] rotate-180 font-serif font-normal text-[17px] tracking-[.01em] leading-[1.05] text-left flex-1 py-[30px_0_16px] px-0"
                 style={{ paddingTop: 30, paddingBottom: 16 }}
-                dangerouslySetInnerHTML={{ __html: book.title }}
+                dangerouslySetInnerHTML={{ __html: sanitizeEmphasisOnly(book.title) }}
               />
               <span className="[writing-mode:vertical-rl] rotate-180 font-mono text-[9.5px] tracking-[.28em] uppercase opacity-65 pb-2">
                 N. Louaar
@@ -112,7 +112,7 @@ export default function BookShelf({ books }: BookShelfProps) {
             <h3
               className="font-serif font-normal text-[clamp(40px,4.4vw,64px)] leading-[1.0] tracking-[-0.015em] text-[var(--color-ink)] mt-6
                          [&_em]:italic [&_em]:font-light [&_em]:text-[#3a3a35]"
-              dangerouslySetInnerHTML={{ __html: active.title }}
+              dangerouslySetInnerHTML={{ __html: sanitizeEmphasisOnly(active.title) }}
             />
 
             <p className="font-serif text-[19px] leading-[1.5] text-[#1a1a17] mt-7 max-w-[48ch]">
