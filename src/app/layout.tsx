@@ -3,8 +3,7 @@ import type { Metadata } from "next";
 import { connection } from "next/server";
 import { cormorant, geist, jetbrainsMono } from "@/lib/fonts";
 import "./globals.css";
-
-const BASE_URL = "https://nabillouaar.fr";
+import { SITE_URL as BASE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),

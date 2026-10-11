@@ -16,15 +16,15 @@ Le site est destiné à la promotion de son travail auprès du public, de la pre
 
 | Couche | Détail |
 |---|---|
-| Framework | Next.js **16.2.9** — App Router + Turbopack |
+| Framework | Next.js **16.3.8** (React **19.2.8**) — App Router + Turbopack |
 | Langage | TypeScript **5** |
-| Styling | Tailwind CSS **v4** + composants shadcn/ui + MagicUI |
-| ORM | Prisma **7.8.0** (client généré dans `src/generated/prisma`, adapter `@prisma/adapter-pg`) |
+| Styling | Tailwind CSS **4.3.3** + composants shadcn/ui + MagicUI |
+| ORM | Prisma **7.10.0** (client généré dans `src/generated/prisma`, adapter `@prisma/adapter-pg`) |
 | Base de données | PostgreSQL (Neon en prod, PostgreSQL natif Windows en local) |
 | Auth | Authentification admin maison — JWT (`jose`) + hash de mot de passe (`bcryptjs`), pas de NextAuth |
 | Rate limiting | Upstash Redis + `@upstash/ratelimit` (fallback in-memory si absent) |
 | Validation | Zod **4** |
-| Tests | Vitest **4** |
+| Tests | Vitest **4.1.11** |
 | Gestionnaire de paquets | npm |
 
 ### Variables d'environnement (`.env.example`)
@@ -48,7 +48,7 @@ nabil-louaar-portfolio/
 ├── prisma.config.ts         # Configuration Prisma 7 (URLs de connexion)
 ├── public/
 │   ├── images/               # Portraits, logos (WebP)
-│   ├── sitemap.xml, robots.txt, llms.txt
+│   ├── llms.txt              # Résumé du site pour les moteurs IA
 ├── docs/
 │   └── screenshot-home.png  # Capture d'écran de la page d'accueil (prod)
 ├── scripts/
@@ -63,8 +63,8 @@ nabil-louaar-portfolio/
 │   │   ├── layout.tsx        # Layout racine — fonts, SEO, JSON-LD
 │   │   ├── page.tsx          # Page d'accueil (assemble les sections, force-dynamic)
 │   │   ├── error.tsx, not-found.tsx
-│   │   ├── robots.ts         # Génération robots.txt
-│   │   └── sitemap.ts        # Génération sitemap.xml
+│   │   ├── robots.ts         # Génération /robots.txt (URL depuis SITE_URL)
+│   │   └── sitemap.ts        # Génération /sitemap.xml (URL depuis SITE_URL)
 │   ├── components/
 │   │   ├── layout/            # Header, Footer, NavigationOverlay, BackToTop
 │   │   ├── sections/          # HeroSection, PresentationSection, WritingSection,
@@ -80,6 +80,7 @@ nabil-louaar-portfolio/
 │   │   ├── db.ts               # Singleton PrismaClient (adapter PostgreSQL)
 │   │   ├── auth.ts / auth-edge.ts  # JWT (jose) + hash password (bcryptjs)
 │   │   ├── rate-limit.ts       # Rate limiting Upstash
+│   │   ├── site.ts             # SITE_URL : URL canonique unique
 │   │   └── utils.ts, fonts.ts
 │   ├── generated/prisma/      # Client Prisma généré
 │   └── middleware.ts           # Protection des routes /admin/*
@@ -94,7 +95,7 @@ ZarogDev — 2026
 
 ## Démo en ligne
 
-[https://nabil-louaar-portfolio.vercel.app](https://nabil-louaar-portfolio.vercel.app)
+Production : [https://nabil-louaar-portfolio.vercel.app](https://nabil-louaar-portfolio.vercel.app) — pas de domaine personnalisé, l'URL Vercel est l'URL canonique (constante `SITE_URL` dans `src/lib/site.ts`).
 
 ## Aperçu
 

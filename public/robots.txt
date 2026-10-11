@@ -1,9 +1,0 @@
-User-agent: *
-Allow: /
-
-# Bloquer l'accès à l'administration
-Disallow: /admin/
-Disallow: /api/
-
-# Sitemap
-Sitemap: https://nabillouaar.fr/sitemap.xml

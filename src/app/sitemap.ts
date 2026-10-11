@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
-
-const BASE_URL = "https://nabillouaar.fr";
+import { SITE_URL as BASE_URL } from "@/lib/site";
 
 // Fixed date: only update when content actually changes.
 const SITE_LAST_MODIFIED = new Date("2026-06-22");

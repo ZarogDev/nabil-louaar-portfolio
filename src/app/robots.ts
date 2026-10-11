@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/site";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -16,6 +17,6 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: "Amazonbot", allow: "/" },
       { userAgent: "anthropic-ai", allow: "/" },
     ],
-    sitemap: "https://nabillouaar.fr/sitemap.xml",
+    sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }
