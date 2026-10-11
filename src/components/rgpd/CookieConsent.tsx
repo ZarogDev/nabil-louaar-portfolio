@@ -1,18 +1,39 @@
 "use client";
-import { useState, useEffect } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import Link from 'next/link';
 
+const STORAGE_KEY = 'cookie-consent';
+
+function subscribe(onChange: () => void) {
+  window.addEventListener('storage', onChange);
+  return () => window.removeEventListener('storage', onChange);
+}
+
+function readConsent(): string | null {
+  try {
+    return localStorage.getItem(STORAGE_KEY);
+  } catch {
+    return 'unavailable';
+  }
+}
+
+function saveConsent(value: 'accepted' | 'declined') {
+  try {
+    localStorage.setItem(STORAGE_KEY, value);
+  } catch {
+    /* storage blocked: the choice simply won't persist */
+  }
+}
+
 export default function CookieConsent() {
-  const [show, setShow] = useState(false);
+  // Server snapshot is non-null so the banner is never server-rendered (no hydration mismatch).
+  const stored = useSyncExternalStore(subscribe, readConsent, () => 'ssr');
+  const [dismissed, setDismissed] = useState(false);
 
-  useEffect(() => {
-    if (!localStorage.getItem('cookie-consent')) setShow(true);
-  }, []);
+  const accept = () => { saveConsent('accepted'); setDismissed(true); };
+  const decline = () => { saveConsent('declined'); setDismissed(true); };
 
-  const accept = () => { localStorage.setItem('cookie-consent', 'accepted'); setShow(false); };
-  const decline = () => { localStorage.setItem('cookie-consent', 'declined'); setShow(false); };
-
-  if (!show) return null;
+  if (dismissed || stored !== null) return null;
 
   return (
     <div

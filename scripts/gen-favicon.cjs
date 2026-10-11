@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports -- standalone Node CJS script */
 // Génère les icônes du site à partir du monogramme (book + plume).
 // Usage : node scripts/gen-favicon.cjs  — puis supprimable.
 const sharp = require("sharp");
