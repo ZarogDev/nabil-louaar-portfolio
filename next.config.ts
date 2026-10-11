@@ -1,7 +1,5 @@
 import type { NextConfig } from "next";
 
-const isDev = process.env.NODE_ENV === "development";
-
 const securityHeaders = [
   { key: "X-DNS-Prefetch-Control",    value: "on" },
   { key: "X-Frame-Options",           value: "DENY" },
@@ -12,22 +10,7 @@ const securityHeaders = [
     key: "Strict-Transport-Security",
     value: "max-age=63072000; includeSubDomains; preload",
   },
-  {
-    key: "Content-Security-Policy",
-    value: [
-      "default-src 'self'",
-      // unsafe-eval is only needed in dev (HMR / React Fast Refresh)
-      // unsafe-inline is only needed in dev; production uses nonce-based or strict-dynamic
-      isDev
-        ? "script-src 'self' 'unsafe-inline' 'unsafe-eval'"
-        : "script-src 'self'",
-      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-      "font-src 'self' https://fonts.gstatic.com",
-      "img-src 'self' data: blob: https://img.youtube.com https://i.ytimg.com",
-      "connect-src 'self'",
-      "frame-ancestors 'none'",
-    ].join("; "),
-  },
+  // Content-Security-Policy is set per request (with a nonce) in src/middleware.ts.
 ];
 
 const nextConfig: NextConfig = {

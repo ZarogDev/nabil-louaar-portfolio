@@ -1,5 +1,6 @@
 import CookieConsent from '@/components/rgpd/CookieConsent';
 import type { Metadata } from "next";
+import { connection } from "next/server";
 import { cormorant, geist, jetbrainsMono } from "@/lib/fonts";
 import "./globals.css";
 
@@ -205,9 +206,12 @@ const faqJsonLd = {
 
 import RouteScrollReset from "@/components/RouteScrollReset";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  // The CSP nonce (src/middleware.ts) is per request: pages must render
+  // dynamically so Next.js can stamp it on its inline scripts.
+  await connection();
   return (
     <html
       lang="fr"
