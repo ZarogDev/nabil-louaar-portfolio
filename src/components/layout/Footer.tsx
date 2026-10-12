@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from "next/image";
 
 const navLinks = ["Accueil", "Présentation", "Écriture", "Vidéo"];
-const navHrefs = ["#home", "#presentation", "#ecriture", "#video"];
+const navHrefs = ["/#home", "/#presentation", "/#ecriture", "/#video"];
 const contactLinks = [
   { label: "Presse — presse@louaar.fr", href: "mailto:presse@louaar.fr" },
   { label: "Agent — c.mercier@m-l.fr",  href: "mailto:c.mercier@m-l.fr" },
@@ -87,20 +87,23 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Barre de bas */}
-      <div className="max-w-[1640px] mx-auto mt-[clamp(50px,6vw,90px)] border-t border-[#1f1d1a] pt-[22px] flex flex-col gap-3 md:flex-row md:items-center md:justify-between font-mono text-[10.5px] tracking-[.18em] uppercase text-[#7a7770]">
-        <span>© Nabil Louaar — 2026</span>
-        <span className="tracking-[.14em] normal-case text-[10px]">
-          © 2026 ZarogDev. Agence digitale — design &amp; développement signés ZarogDev.{" "}
+      {/* Barre du bas (modèle Seven Films) : une ligne en desktop, empilée et centrée en mobile,
+          jamais sous le bouton « retour en haut » (marges droite / basse). */}
+      <div className="max-w-[1640px] mx-auto mt-[clamp(50px,6vw,90px)] border-t border-[#1f1d1a] pt-[22px] pb-24 lg:pb-0 lg:pr-24 grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] items-center gap-x-8 gap-y-3 text-center font-mono text-[10px] tracking-[.14em] text-[#7a7770]">
+        <p className="lg:text-left">
+          © 2026 <strong className="font-medium text-[#a8a59d]">ZarogDev.</strong> Agence digitale — Tous droits réservés
+        </p>
+        <nav aria-label="Informations légales" className="flex flex-wrap justify-center gap-x-5 gap-y-2">
+          <Link href="/mentions-legales" className="text-[9px] tracking-[.18em] uppercase text-[#5a5752] hover:text-[#a8a59d] transition-colors">Mentions légales</Link>
+          <Link href="/cgu" className="text-[9px] tracking-[.18em] uppercase text-[#5a5752] hover:text-[#a8a59d] transition-colors">CGU</Link>
+          <Link href="/politique-confidentialite" className="text-[9px] tracking-[.18em] uppercase text-[#5a5752] hover:text-[#a8a59d] transition-colors">Confidentialité</Link>
+        </nav>
+        <p className="lg:text-right">
+          design &amp; développement signés <strong className="font-medium text-[#a8a59d]">ZarogDev.</strong>{" "}
           <a href="mailto:zarogdev@gmail.com" className="hover:text-[#a8a59d] transition-colors underline underline-offset-2">
             contact@zarogdev.fr
           </a>
-        </span>
-        <nav className="flex gap-5">
-          <Link href="/mentions-legales" className="text-[9px] tracking-[.18em] uppercase text-[#5a5752] hover:text-[#a8a59d] transition-colors">Mentions légales</Link>
-          <Link href="/politique-confidentialite" className="text-[9px] tracking-[.18em] uppercase text-[#5a5752] hover:text-[#a8a59d] transition-colors">Confidentialité</Link>
-          <Link href="/cgu" className="text-[9px] tracking-[.18em] uppercase text-[#5a5752] hover:text-[#a8a59d] transition-colors">CGU</Link>
-        </nav>
+        </p>
       </div>
     </footer>
   );

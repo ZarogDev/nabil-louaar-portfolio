@@ -29,6 +29,11 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "i.ytimg.com" },
     ],
   },
+  async redirects() {
+    return [
+      { source: "/politique-de-confidentialite", destination: "/politique-confidentialite", permanent: true },
+    ];
+  },
   async headers() {
     return [
       {

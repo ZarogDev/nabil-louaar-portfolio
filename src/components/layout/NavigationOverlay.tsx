@@ -9,11 +9,11 @@ interface NavigationOverlayProps {
 }
 
 const navItems = [
-  { href: "#home",         label: "Accueil",        em: null },
-  { href: "#presentation", label: "Présentation",      em: null     },
-  { href: "#ecriture",     label: null,              em: "Écriture" },
-  { href: "#video",        label: "Vidéo",           em: null },
-  { href: "#contact",      label: "Contact",         em: null },
+  { href: "/#home",         label: "Accueil",        em: null },
+  { href: "/#presentation", label: "Présentation",      em: null     },
+  { href: "/#ecriture",     label: null,              em: "Écriture" },
+  { href: "/#video",        label: "Vidéo",           em: null },
+  { href: "/#contact",      label: "Contact",         em: null },
 ];
 
 export default function NavigationOverlay({ isOpen, onClose }: NavigationOverlayProps) {
