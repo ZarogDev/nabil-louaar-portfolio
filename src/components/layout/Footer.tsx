@@ -97,6 +97,7 @@ export default function Footer() {
           <Link href="/mentions-legales" className="text-[9px] tracking-[.18em] uppercase text-[#5a5752] hover:text-[#a8a59d] transition-colors">Mentions légales</Link>
           <Link href="/cgu" className="text-[9px] tracking-[.18em] uppercase text-[#5a5752] hover:text-[#a8a59d] transition-colors">CGU</Link>
           <Link href="/politique-confidentialite" className="text-[9px] tracking-[.18em] uppercase text-[#5a5752] hover:text-[#a8a59d] transition-colors">Confidentialité</Link>
+          <Link href="/politique-confidentialite#cookies" className="text-[9px] tracking-[.18em] uppercase text-[#5a5752] hover:text-[#a8a59d] transition-colors">Cookies</Link>
         </nav>
         <p className="lg:text-right">
           design &amp; développement signés <strong className="font-medium text-[#a8a59d]">ZarogDev.</strong>{" "}

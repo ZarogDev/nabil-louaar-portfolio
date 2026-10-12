@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
@@ -116,19 +117,15 @@ export default function NewsletterSection() {
             </p>
           )}
 
-          {status !== "success" && (
-            <div className="flex justify-between text-[var(--color-soft)] mt-2">
-              <span className="flex gap-[10px] items-center">
-                <span className="w-3 h-3 border border-[var(--color-soft)] inline-block relative after:content-[''] after:absolute after:inset-[2px] after:bg-[var(--color-ink)]" />
-                <span className="font-mono text-[11px] tracking-[.05em] normal-case">
-                  J&apos;accepte de recevoir la lettre saisonnière
-                </span>
-              </span>
-              <span className="font-mono text-[11px] tracking-[.18em] uppercase">
-                Désinscription · un clic
-              </span>
-            </div>
-          )}
+          <p className="font-mono text-[11px] tracking-[.05em] normal-case leading-[1.6] text-[var(--color-soft)] mt-2">
+            En vous abonnant, vous acceptez de recevoir la lettre saisonnière de Nabil Louaar. Votre adresse
+            e-mail sert uniquement à cet envoi, est conservée jusqu&apos;à votre désinscription (possible à tout
+            moment par e-mail à presse@louaar.fr) et n&apos;est jamais cédée. Vos droits :{" "}
+            <Link href="/politique-confidentialite" className="underline underline-offset-2 hover:text-[var(--color-ink)]">
+              politique de confidentialité
+            </Link>
+            .
+          </p>
         </form>
 
       </div>
