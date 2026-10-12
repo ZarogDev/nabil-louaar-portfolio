@@ -25,7 +25,7 @@ export default function MentionsLegales() {
       </LegalSection>
 
       <LegalSection title="Hébergement">
-        <p>Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis.</p>
+        <p>Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis.</p>
       </LegalSection>
 
       <LegalSection title="Conception & développement">
