@@ -203,6 +203,7 @@ const faqJsonLd = {
 };
 
 import RouteScrollReset from "@/components/RouteScrollReset";
+import BackToTop from "@/components/layout/BackToTop";
 
 export default async function RootLayout({
   children,
@@ -234,6 +235,7 @@ export default async function RootLayout({
           Aller au contenu
         </a>
         {children}
+        <BackToTop />
       </body>
     </html>
   );

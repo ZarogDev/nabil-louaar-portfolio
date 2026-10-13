@@ -1,6 +1,5 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import BackToTop from "@/components/layout/BackToTop";
 
 /**
  * Gabarit des pages légales (modèle Seven Films) : header du site sur un
@@ -24,7 +23,6 @@ export function LegalPage({ title, children }: { title: string; children: React.
         </div>
       </main>
       <Footer />
-      <BackToTop />
     </>
   );
 }

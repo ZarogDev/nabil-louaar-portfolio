@@ -1,6 +1,5 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import BackToTop from "@/components/layout/BackToTop";
 import HeroSection from "@/components/sections/HeroSection";
 import PresentationSection from "@/components/sections/PresentationSection";
 import WritingSection from "@/components/sections/WritingSection";
@@ -28,7 +27,6 @@ export default function HomePage() {
       </main>
 
       <Footer />
-      <BackToTop />
     </>
   );
 }

@@ -12,11 +12,6 @@ export const metadata: Metadata = {
 export default function MentionsLegales() {
   return (
     <LegalPage title="Mentions légales">
-      <p className="text-[15px] leading-[1.7] text-[var(--color-ink)]/80 mb-10">
-        Informations publiées en application de l’article 1-1 de la loi n° 2004-575 du 21 juin 2004 pour la confiance
-        dans l’économie numérique (LCEN). Site : <a href={SITE_URL} className={legalLink}>{SITE_URL.replace("https://", "")}</a>.
-      </p>
-
       <LegalSection title="Éditeur du site">
         <p>
           Le présent site est le portfolio personnel de <strong>Nabil Louaar</strong>, qui en est l’éditeur.
@@ -37,6 +32,10 @@ export default function MentionsLegales() {
           la disposition du public que le nom de l’hébergeur, ses coordonnées personnelles ayant alors été communiquées
           à celui-ci.
         </p>
+        <p className="text-[13px]">
+          Informations publiées en application de l’article 1-1 de la loi n° 2004-575 du 21 juin 2004 pour la confiance
+          dans l’économie numérique (LCEN). Site : <a href={SITE_URL} className={legalLink}>{SITE_URL.replace("https://", "")}</a>.
+        </p>
       </LegalSection>
 
       <LegalSection title="Directeur de la publication">
@@ -51,13 +50,12 @@ export default function MentionsLegales() {
         </p>
       </LegalSection>
 
-      <LegalSection title="Conception & réalisation">
+      <LegalSection title="Conception & développement">
         <p>
-          ZarogDev — Saabri EL HALOUI, entrepreneur individuel (EI), micro-entreprise. SIRET : [À COMPLÉTER].
-          TVA non applicable, art. 293 B du CGI.
-          <br />
-          E-mail : <a href="mailto:contact@zarogdev.fr" className={legalLink}>contact@zarogdev.fr</a> — Site :{" "}
-          <a href="https://zarogdev.fr" className={legalLink}>zarogdev.fr</a>
+          ZarogDev — Agence digitale — design &amp; développement signés ZarogDev. Saabri EL HALOUI, entrepreneur
+          individuel (EI), 25 rue de Warens, 73000 Chambéry, France. Téléphone : 06 52 26 82 75 — e-mail :{" "}
+          <a href="mailto:zarogdev@gmail.com" className={legalLink}>contact@zarogdev.fr</a> — site :{" "}
+          <a href="https://zarogdev.fr" className={legalLink} target="_blank" rel="noopener noreferrer">zarogdev.fr</a>.
         </p>
         <p className="text-[13px]">
           ZarogDev intervient comme prestataire technique et n’est pas l’éditeur du site ni responsable de ses contenus.
